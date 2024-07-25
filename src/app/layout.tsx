@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bodoni_Moda as FontSerif } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
+import { Container } from "@/components/ui/container";
+import { H4 } from "@/components/ui/typography";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSerif = FontSerif({ subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +29,47 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen font-serif antialiased",
+          fontSerif.variable
+        )}
+      >
+        <Navbar />
+        <main>{children}</main>
+      </body>
     </html>
+  );
+}
+
+function Navbar() {
+  const navItems = [
+    { href: "/", text: "ARTMS", isBold: true },
+    { href: "/", text: "Home" },
+    { href: "/", text: "Shop" },
+    { href: "/", text: "Blog" },
+  ];
+
+  return (
+    <Container variant="breakpointPadded">
+      <NavigationMenu>
+        <NavigationMenuList>
+          {navItems.map((item, index) => (
+            <NavigationMenuItem
+              key={index}
+              className={navigationMenuTriggerStyle()}
+            >
+              <Link href={item.href} legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <H4 className={item.isBold ? "font-extrabold" : ""}>
+                    {item.text}
+                  </H4>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+    </Container>
   );
 }
