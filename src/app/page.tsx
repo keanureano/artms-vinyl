@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <Container>
       <SectionOne />
-
       <SectionTwo />
     </Container>
   );
@@ -25,9 +24,9 @@ export default function Home() {
 
 function SectionOne() {
   const carouselImages = [
-    { src: "/vinyl1.avif", alt: "Vinyl 1" },
-    { src: "/vinyl2.avif", alt: "Vinyl 2" },
-    { src: "/vinyl3.avif", alt: "Vinyl 3" },
+    { src: "./vinyl1.avif", alt: "Vinyl 1" },
+    { src: "./vinyl2.avif", alt: "Vinyl 2" },
+    { src: "./vinyl3.avif", alt: "Vinyl 3" },
   ];
   return (
     <>
